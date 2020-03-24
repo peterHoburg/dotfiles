@@ -24,7 +24,6 @@ indent_style = space
 indent_size = 2
 
 # 2 spaces
-[*.{js,coffee,yml,html,css,sass,scss,yaml,json}]
+[*.{js,coffee,yml,html,css,sass,scss,yaml}]
 indent_style = space
 indent_size = 2
-

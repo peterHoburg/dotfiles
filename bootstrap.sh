@@ -1,53 +1,60 @@
 #! /bin/bash
-########## Variables
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-OLDDIR=~/dotfiles_old             # old dotfiles backup directory
-FILES=".zshrc .vimrc .tmux.conf .amethyst .editorconfig"  # list of files/folders to symlink in homedir
+########## Variables
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+OLDDIR=~/dotfiles_old                   # old dotfiles backup directory
+FILES=".zshrc .tmux.conf .editorconfig" # list of files/folders to symlink in homedir
+ZSH_INSTALLED=false && (type zsh >/dev/null) && zsh_installed=true
 ##########
 
-# Install homebrew and brew cask on osx if they aren't already installed
-if ! type brew > /dev/null && [[ `uname` == 'Darwin' ]]; then
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  brew tap caskroom/cask
-  #brew tap caskroom/fonts
-  brew tap buo/cask-upgrade
+if [[ $(uname) == 'Linux' ]]; then
+  if [[ -n "$(command -v apt)" ]]; then
+    echo "using apt"
+    sudo apt-get update
+    sudo apt-get upgrade
+    sudo apt-get install $(grep -vE "^\s*#" requirements/linux.txt | tr "\n" " ")
+  elif [[ -n "$(command -v pamac)" ]]; then
+    echo "using pamac"
+    sudo pamac update
+    sudo pamac install $(grep -vE "^\s*#" requirements/linux.txt | tr "\n" " ")
+  fi
+  sudo snap install $(grep -vE "^\s*#" requirements/snap.txt | tr "\n" " ")
+
+  # install a temp fix for lenovo throttling
+  git clone https://github.com/erpalma/lenovo-throttling-fix.git ~/Documents
+  sudo ~/Documents/lenovo-throttling-fix/install.sh
+
+  # TODO see if this is already there
+  # install jetbrains toolbox
+  wget -O ~/Documents/jetbrains-toolbox-1.16.6319.tar.gz "https://download.jetbrains.com/toolbox/jetbrains-toolbox-1.16.6319.tar.gz"
+  tar -xf ~/Documents/jetbrains-toolbox-1.16.6319.tar.gz --directory .
+  chmod u+x ~/Documents/jetbrains-toolbox-1.16.6319/jetbrains-toolbox
+  ~/Documents/jetbrains-toolbox-1.16.6319/jetbrains-toolbox
+
+elif [[ $(uname) == 'Darwin' ]]; then
+  if ! type brew >/dev/null; then
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    brew tap caskroom/cask
+    brew tap buo/cask-upgrade
+  fi
+  cat $DIR/requirements/brew_packages.txt | xargs brew install
+  cat $DIR/requirements/brew_casks.txt | xargs brew cask install
 fi
 
-# Install nix package manager if it isn't already installed.
-# TODO: don't install if running nixos
-# TODO: this has been a pain in the ass.  For now just install nix first and then run the script
-# if ! type nix > /dev/null; then
-  #curl https://nixos.org/nix/install | bash
-  # source $SHELL
-  # sudo launchctl start org.nixos.nix-daemon
-# fi
-# nix isn't on the path in the session after installing it
-# refresh shell after installing nix. might be a better way to do this
-# source $SHELL
+# install Rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
-if [[ `uname` == 'Darwin' ]] ; then
-  # brew tap d12frosted/emacs-plus
-  # brew install emacs-plus
-  cat $DIR/brew_packages.txt | xargs brew install
-  cat $DIR/brew_casks.txt | xargs brew cask install
-fi
-
-# install all nix packages in nix_packages.txt
-#cat $DIR/nix_packages.txt | xargs nix-env -i
-# if [[ `uname` != 'Darwin' ]] ; then
-  # cat $DIR/non_osx_nix_packages.txt | xargs nix-env -i
-# fi
-# cat $DIR/nix_packages.txt | xargs nix-env -i
-# refresh shell after installing nix packages. might be a better way to do this
-# source $SHELL
+# install rust packages
+cargo install $(grep -vE "^\s*#" requirements/cargo.txt | tr "\n" " ")
 
 ### !!!WARNING!!! ####
 # THIS IS ANNOYING BECAUSE IT WILL START AN OH-MY-ZSH SHELL WHICH YOU WILL WANT TO EXIT TO FINISH THE SCRIPT
 # thinking about ditching oh-my-zsh but it's working so far so I will have to revisit if it gets bad
+echo "###########Exit the zsh shell after it pop up to continue!###########"
 if [ ! -d ~/.oh-my-zsh ]; then
   # if zsh wasn't installed at the beginning of the script, we install oh-my-zsh after it is brew installed
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+  chsh -s $(which zsh)
 fi
 ### !!!WARNING!!! ####
 
@@ -66,29 +73,19 @@ for file in $FILES; do
   echo "Moving any existing dotfiles from ~ to $OLDDIR"
   mv ~/$file ~/dotfiles_old/
   echo "Creating symlink to $file in home directory."
-  ln -s $DIR/$file ~/$file
+  ln -s $DIR/conf_files/$file ~/$file
 done
 
-sudo npm -g install instant-markdown-d
+# add ssh config
+ln -s $DIR/ssh/config ~/.ssh/config
+ln -s $DIR/ssh/config_personal ~/.ssh/config_personal
+ssh-keygen -f ~/.ssh/github
 
 # install tmux plugin manager if the directory doesn't already exist
 if [ ! -d ~/.tmux/plugins/tpm ]; then
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
 
-if [ -f ~/.vim/pack/minpac/opt/minpac/README.md ];
-then
-  echo "minpac already installed"
-else
-  echo "Installing minpac"
-  mkdir -p ~/.vim/pack/minpac/opt
-  git clone https://github.com/k-takata/minpac.git ~/.vim/pack/minpac/opt/minpac
-
-fi
-
 source ~/.zshrc
-vim +PackUpdate +qall
 
-mkdir -p ~/.vim/colors
-cp ~/.vim/pack/minpac/start/gruvbox/colors/gruvbox.vim ~/.vim/colors/
-
+vim $DIR/todo_post_bootstrap.txt

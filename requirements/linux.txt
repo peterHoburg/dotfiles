@@ -1,0 +1,16 @@
+git
+build-essential
+python3-dev
+libdbus-glib-1-dev
+libgirepository1.0-dev
+libcairo2-dev
+python3-venv
+python3-wheel
+tmux
+vim
+zsh
+stress
+s-tui
+snapd
+flatpak
+gnome-tweaks

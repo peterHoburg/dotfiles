@@ -1,0 +1,19 @@
+Firefox:
+    Log into firefox
+    Change firefox font to jetbrains mono
+    Upload new ssh key to github
+    Upload new ssh key to space
+
+Toolbox:
+    Login to jetbrains account
+    Download pycharm
+
+GNOME:
+    Dark theme
+    Natural scrolling
+    Change caps lock to escape
+    Change system font to jetbrains mono
+
+OSx:
+    Install better snapping tool
+    Install which
