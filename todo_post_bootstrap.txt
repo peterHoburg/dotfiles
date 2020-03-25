@@ -13,6 +13,8 @@ GNOME:
     Natural scrolling
     Change caps lock to escape
     Change system font to jetbrains mono
+    Add s-tui to run at boot
+    Add topgrade to run at boot
 
 OSx:
     Install better snapping tool

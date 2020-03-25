@@ -79,7 +79,10 @@ done
 # add ssh config
 ln -s $DIR/ssh/config ~/.ssh/config
 ln -s $DIR/ssh/config_personal ~/.ssh/config_personal
+
+# generate ssh keys
 ssh-keygen -f ~/.ssh/github
+ssh-keygen -f ~/.ssh/space
 
 # install tmux plugin manager if the directory doesn't already exist
 if [ ! -d ~/.tmux/plugins/tpm ]; then
