@@ -14,3 +14,4 @@ s-tui
 snapd
 flatpak
 gnome-tweaks
+google-cloud-sdk
