@@ -23,6 +23,7 @@ if [[ $(uname) == 'Linux' ]]; then
     sudo apt-get install $(grep -vE "^\s*#" requirements/linux.txt | tr "\n" " ")
 
     # Docker ppa
+    # TODO check if this has already been done
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
     sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
     sudo apt-get update

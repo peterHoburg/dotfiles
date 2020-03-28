@@ -20,3 +20,4 @@ ca-certificates
 curl
 gnupg-agent
 software-properties-common
+htop
