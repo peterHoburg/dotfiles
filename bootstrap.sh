@@ -22,6 +22,17 @@ if [[ $(uname) == 'Linux' ]]; then
     sudo apt-get upgrade
     sudo apt-get install $(grep -vE "^\s*#" requirements/linux.txt | tr "\n" " ")
 
+    # Docker ppa
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+    sudo apt-get update
+    sudo apt-get install docker-ce docker-ce-cli containerd.io
+    sudo groupadd docker
+    sudo usermod -aG docker $USER
+    newgrp docker
+    sudo systemctl enable docker
+    # https://docs.docker.com/install/linux/linux-postinstall/
+
 
     if [[ ! -d "$DF_TMP_DIR/google_chrome" ]]; then
       echo "Installing google chrome"
