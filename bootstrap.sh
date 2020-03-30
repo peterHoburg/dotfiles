@@ -6,7 +6,6 @@ OLDDIR=~/dotfiles_old                   # old dotfiles backup directory
 FILES=".zshrc .tmux.conf .editorconfig" # list of files/folders to symlink in homedir
 DF_TMP_DIR=~/Downloads/dotfiles_temp
 ##########
-
 if [[ $(uname) == 'Linux' ]]; then
   mkdir $DF_TMP_DIR
 
@@ -40,6 +39,12 @@ if [[ $(uname) == 'Linux' ]]; then
       mkdir $DF_TMP_DIR/google_chrome
       wget -p $DF_TMP_DIR/google_chrome https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
       sudo apt install $DF_TMP_DIR/google_chrome/google-chrome-stable_current_amd64.deb
+    fi
+    if [[ ! -d "$DF_TMP_DIR/zoom" ]]; then
+      echo "Installing zoom"
+      mkdir $DF_TMP_DIR/zoom
+      wget -p $DF_TMP_DIR/zoom https://d11yldzmag5yn.cloudfront.net/prod/3.5.374815.0324/zoom_amd64.deb?_x_zm_rtaid=_YZ9ye0mQkCkC7J_Sb9pFw.1585594509323.6ef0a42aeb71c2071b889a65537e5ce9&_x_zm_rhtaid=204
+      sudo apt install $DF_TMP_DIR/zoom/zoom_amd64.deb
     fi
 
   elif [[ -n "$(command -v pamac)" ]]; then

@@ -19,3 +19,4 @@ GNOME:
 OSx:
     Install better snapping tool
     Install which
+    Install Zoom
