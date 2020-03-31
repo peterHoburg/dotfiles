@@ -7,3 +7,4 @@ python
 python3
 curl
 fzf
+direnv

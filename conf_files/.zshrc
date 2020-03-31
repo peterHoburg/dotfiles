@@ -14,6 +14,7 @@ ZSH_THEME="bira"
 plugins=(
 git
 zsh-autosuggestions
+tmux
 
 
 zsh-syntax-highlighting
@@ -35,3 +36,4 @@ alias alac='vim ~/.alacritty.yml'
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+eval "$(direnv hook zsh)"
