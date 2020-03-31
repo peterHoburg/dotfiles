@@ -21,3 +21,4 @@ curl
 gnupg-agent
 software-properties-common
 htop
+alacritty

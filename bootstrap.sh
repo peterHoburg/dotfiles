@@ -3,7 +3,7 @@
 ########## Variables
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 OLDDIR=~/dotfiles_old                   # old dotfiles backup directory
-FILES=".zshrc .tmux.conf .editorconfig" # list of files/folders to symlink in homedir
+FILES=".zshrc .tmux.conf .editorconfig .alacritty.yml" # list of files/folders to symlink in homedir
 DF_TMP_DIR=~/Downloads/dotfiles_temp
 ##########
 if [[ $(uname) == 'Linux' ]]; then
