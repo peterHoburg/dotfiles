@@ -64,3 +64,7 @@ x  kill pane
 # rsync
 rsync -a -v -z -h -r -e "ssh -i ~/.ssh/dev-systems.pem" ./ <ssh_user@ssh_location>:<destination_dir>
 
+# Terminal
+## fzf
+CTRL + t
+CTRL + r
