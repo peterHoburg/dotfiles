@@ -11,7 +11,13 @@ ZSH_THEME="bira"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(
+git
+zsh-autosuggestions
+
+
+zsh-syntax-highlighting
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -25,4 +31,7 @@ alias ls='ls -a'
 alias t='thyme'
 alias bam='find . | grep -E "(__pycache__|\.pyc|\.pyo$)" | xargs rm -rf \;'
 alias dev='~/Documents/dev'
+alias alac='vim ~/.alacritty.yml'
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

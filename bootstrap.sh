@@ -85,6 +85,7 @@ elif [[ $(uname) == 'Darwin' ]]; then
   fi
   cat $DIR/requirements/brew_packages.txt | xargs brew install
   cat $DIR/requirements/brew_casks.txt | xargs brew cask install
+  /usr/local/opt/fzf/install
 fi
 
 # install Rust
@@ -107,7 +108,6 @@ if [ ! -d ~/.oh-my-zsh ]; then
   chsh -s $(which zsh)
 fi
 ### !!!WARNING!!! ####
-
 # create dotfiles_old in homedir
 echo "Creating $OLDDIR for backup of any existing dotfiles in ~"
 mkdir -p $OLDDIR
@@ -144,6 +144,11 @@ if [ ! -d ~/.tmux/plugins/tpm ]; then
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
 
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
 source ~/.zshrc
+
+
 
 vim $DIR/todo_post_bootstrap.txt
