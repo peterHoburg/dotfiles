@@ -23,7 +23,7 @@ zsh-syntax-highlighting
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.cargo/bin"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.cargo/bin:/usr/lib"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8

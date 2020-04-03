@@ -8,6 +8,9 @@ Toolbox:
     Login to jetbrains account
     Download pycharm
 
+All:
+    Install Verracrypt
+
 GNOME:
     Dark theme
     Natural scrolling
