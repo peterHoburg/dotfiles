@@ -45,7 +45,7 @@ function add_gcloud_ppa() {
 function apt_install() {
   echo "using apt"
 
-  add_gcloud_ppa
+#  add_gcloud_ppa
 
   sudo apt-get update
   sudo apt-get upgrade
@@ -54,12 +54,12 @@ function apt_install() {
   install_docker
 
 
-  if [[ ! -d "$DF_TMP_DIR/google_chrome" ]]; then
-    install_chrome
-  fi
-  if [[ ! -d "$DF_TMP_DIR/zoom" ]]; then
-    install_zoom
-  fi
+#  if [[ ! -d "$DF_TMP_DIR/google_chrome" ]]; then
+#    install_chrome
+#  fi
+#  if [[ ! -d "$DF_TMP_DIR/zoom" ]]; then
+#    install_zoom
+#  fi
 }
 
 function install_jetbrains_toolbox() {
