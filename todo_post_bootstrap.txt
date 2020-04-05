@@ -18,6 +18,9 @@ GNOME:
     Change system font to jetbrains mono
     Add s-tui to run at boot
     Add topgrade to run at boot
+    Change keyboard shortcuts:
+        Search -> Super + Space
+        Tweak tools: Change caps to escape
 
 OSx:
     Install better snapping tool
