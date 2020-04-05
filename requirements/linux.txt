@@ -22,5 +22,4 @@ gnupg-agent
 software-properties-common
 htop
 alacritty
-fzf
 direnv
