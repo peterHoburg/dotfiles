@@ -10,8 +10,8 @@ DF_TMP_DIR=~/Downloads/dotfiles_temp
 function install_docker() {
   # Docker ppa
   # TODO check if this has already been done
-#  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-#  sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 
   # TODO check if docker is installed
   sudo apt-get update
@@ -54,12 +54,12 @@ function apt_install() {
   install_docker
 
 
-#  if [[ ! -d "$DF_TMP_DIR/google_chrome" ]]; then
-#    install_chrome
-#  fi
-#  if [[ ! -d "$DF_TMP_DIR/zoom" ]]; then
-#    install_zoom
-#  fi
+  if [[ ! -d "$DF_TMP_DIR/google_chrome" ]]; then
+    install_chrome
+  fi
+  if [[ ! -d "$DF_TMP_DIR/zoom" ]]; then
+    install_zoom
+  fi
 }
 
 function install_jetbrains_toolbox() {
