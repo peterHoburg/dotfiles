@@ -84,10 +84,10 @@ function linux_install () {
 
   sudo snap install $(grep -vE "^\s*#" requirements/snap.txt | tr "\n" " ")
 
-  if [ ! -d "$HOME/Documents/lenovo-throttling-fix" ]; then
+  if [ ! -d "$HOME/Documents/throttled" ]; then
     echo "Installing the lenovo throttling fix"
-    git clone https://github.com/erpalma/lenovo-throttling-fix.git ~/Documents
-    sudo ~/Documents/lenovo-throttling-fix/install.sh
+    git clone https://github.com/erpalma/throttled ~/Documents/throttled
+    sudo ~/Documents/throttled/install.sh
   else
     # TODO add git pull here
     # TODO if there is new code run install.sh again

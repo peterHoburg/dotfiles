@@ -22,6 +22,8 @@ GNOME:
         Search -> Super + Space
         Tweak tools: Change caps to escape
 
+UBUNTU Based Distro:
+    Uninstall thermald
 OSx:
     Install better snapping tool
     Install which
